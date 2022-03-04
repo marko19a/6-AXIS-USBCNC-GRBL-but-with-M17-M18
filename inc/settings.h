@@ -101,6 +101,8 @@ typedef struct {
   float homing_seek_rate;
   uint16_t homing_debounce_delay;
   float homing_pulloff;
+
+  uint8_t power;  // Dirty M17 M18 hack
 } settings_t;
 extern settings_t settings;
 

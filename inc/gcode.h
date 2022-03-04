@@ -45,6 +45,7 @@
 #define MODAL_GROUP_M7 12 // [M3,M4,M5] Spindle turning
 #define MODAL_GROUP_M8 13 // [M7,M8,M9] Coolant control
 #define MODAL_GROUP_M9 14 // [M56] Override control
+#define MODAL_GROUP_M17 15 // [M17,M18] Manula motor power
 
 // Define command actions for within execution-type modal groups (motion, stopping, non-modal). Used
 // internally by the parser to know which command to execute.
@@ -118,6 +119,9 @@
 #define COOLANT_DISABLE 0 // M9 (Default: Must be zero)
 #define COOLANT_FLOOD_ENABLE  PL_COND_FLAG_COOLANT_FLOOD // M8 (NOTE: Uses planner condition bit flag)
 #define COOLANT_MIST_ENABLE   PL_COND_FLAG_COOLANT_MIST  // M7 (NOTE: Uses planner condition bit flag)
+
+#define MOTOR_DISABLE_POWER 0
+#define MOTOR_ENABLE_POWER 1
 
 // Modal Group G8: Tool length offset
 #define TOOL_LENGTH_OFFSET_CANCEL 0 // G49 (Default: Must be zero)
@@ -204,6 +208,7 @@ typedef struct {
   uint8_t program_flow;    // {M0,M1,M2,M30}
   uint8_t coolant;         // {M7,M8,M9}
   uint8_t spindle;         // {M3,M4,M5}
+  uint8_t power;           // {M17,M18}
   uint8_t override;        // {M56}
 } gc_modal_t;
 

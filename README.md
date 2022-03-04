@@ -1,3 +1,5 @@
+## This fork just adds M17 and M18 commands via MANUAL_POWER in config.h
+
 # up to 6-AXIS-USBCNC-GRBL
 This repository is based on [usbcnc grbl](https://github.com/usbcnc/grbl) which in turn is based on [native grbl 1.1f](https://github.com/gnea/grbl)<br>
 With 6-AXIS-USBCNC-GRBL you can use 3,4(default),5 or 6 axis depend on definition in config.h

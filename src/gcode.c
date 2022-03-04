@@ -282,6 +282,27 @@ uint8_t gc_execute_line(char *line)
               case 9: gc_block.modal.coolant = COOLANT_DISABLE; break;
             }
             break;
+          #ifdef MANUAL_POWER
+            word_bit = MODAL_GROUP_M8;
+            case 17: case 18:
+            switch (int_value) {
+            case 17: 
+            {
+              gc_block.modal.power = MOTOR_ENABLE_POWER; 
+              settings.power = gc_block.modal.power;
+              st_wake_up();
+              break;
+            }
+            case 18: 
+            {
+              gc_block.modal.power = MOTOR_DISABLE_POWER; 
+              settings.power = gc_block.modal.power;
+              st_wake_up();
+              break;
+            }
+            }
+            break;
+          #endif
 					#ifdef ENABLE_PARKING_OVERRIDE_CONTROL
 						case 56:
 							word_bit = MODAL_GROUP_M9;

@@ -1,0 +1,4 @@
+Debug_STM32F103C8_FLASH.ld
+Debug_STM32F103R8_FLASH.ld
+Debug/*
+Release/*

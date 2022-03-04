@@ -52,9 +52,9 @@
 // NONE GRBL 1.1f SETTINGS!:
 //************************************************************************************************************
 // Additional axis
-#define AA_AXIS // Disabled by default. Uncomment to enable.
+//#define AA_AXIS // Disabled by default. Uncomment to enable.
 // Don't use high step rate with B and C axis. Less than 80kHz recommended
-//#define AB_AXIS  // Disabled by default. Uncomment to enable.
+#define AB_AXIS  // Disabled by default. Uncomment to enable.
 // CAUTION! C axis use SWD (PA13, PA14). After first flashing you can flash controller only with
 // "under reset" option and with reset pin connected to the programmer!
 // Don't use it if not sure!
@@ -131,6 +131,10 @@
 #define CMD_COOLANT_FLOOD_OVR_TOGGLE 0xA0
 #define CMD_COOLANT_MIST_OVR_TOGGLE 0xA1
 
+
+// WARNING: If manual power is enabled make sure to power on motors before executing any commands otherwise it may not work
+#define MANUAL_POWER  // Enables use of M17 and M18 commands
+
 // If homing is enabled, homing init lock sets Grbl into an alarm state upon power up. This forces
 // the user to perform the homing cycle (or override the locks) before doing anything else. This is
 // mainly a safety feature to remind the user to home, since position is unknown to Grbl.
@@ -156,10 +160,30 @@
 #define HOMING_CYCLE_0 (1<<Z_AXIS)                // REQUIRED: First move Z to clear workspace.
 #define HOMING_CYCLE_1 ((1<<X_AXIS)|(1<<Y_AXIS))  // OPTIONAL: Then move X,Y at the same time.
 #define HOMING_CYCLE_2 (1<<A_AXIS)                // OPTIONAL: Then move A
+
 #elif defined AB_AXIS
-#define HOMING_CYCLE_0 (1<<Z_AXIS)                // REQUIRED: First move Z to clear workspace.
-#define HOMING_CYCLE_1 ((1<<X_AXIS)|(1<<Y_AXIS))  // OPTIONAL: Then move X,Y at the same time.
-#define HOMING_CYCLE_2 ((1<<A_AXIS)|(1<<B_AXIS))  // OPTIONAL: Then move A,B at the same time.
+
+#define BP3
+
+#if defined BP1
+
+//BP1
+#define HOMING_CYCLE_0 (1<<Z_AXIS)					// REQUIRED: First move Z to clear workspace.
+#define HOMING_CYCLE_1 (1<<Y_AXIS)  				// OPTIONAL: Then move X,Y at the same time.
+#define HOMING_CYCLE_2 ((1<<X_AXIS)|(1<<A_AXIS))  	// OPTIONAL: Then move A,B at the same time.
+
+#elif defined BP2
+
+//BP2
+#define HOMING_CYCLE_0 (1<<A_AXIS)
+#define HOMING_CYCLE_1 (1<<X_AXIS)
+
+#else
+
+#define HOMING_CYCLE_0 (1<<X_AXIS)
+
+#endif
+
 #elif defined ABC_AXIS
 #define HOMING_CYCLE_0 (1<<Z_AXIS)                // REQUIRED: First move Z to clear workspace.
 #define HOMING_CYCLE_1 ((1<<X_AXIS)|(1<<Y_AXIS))  // OPTIONAL: Then move X,Y at the same time.
@@ -186,12 +210,12 @@
 // cycle is still invoked by the $H command. This is disabled by default. It's here only to address
 // users that need to switch between a two-axis and three-axis machine. This is actually very rare.
 // If you have a two-axis machine, DON'T USE THIS. Instead, just alter the homing cycle for two-axes.
-// #define HOMING_SINGLE_AXIS_COMMANDS // Default disabled. Uncomment to enable.
+ #define HOMING_SINGLE_AXIS_COMMANDS // Default disabled. Uncomment to enable.
 
 // After homing, Grbl will set by default the entire machine space into negative space, as is typical
 // for professional CNC machines, regardless of where the limit switches are located. Uncomment this
 // define to force Grbl to always set the machine origin at the homed location despite switch orientation.
-// #define HOMING_FORCE_SET_ORIGIN // Uncomment to enable.
+#define HOMING_FORCE_SET_ORIGIN // Uncomment to enable.
 
 // Number of blocks Grbl executes upon startup. These blocks are stored in EEPROM, where the size
 // and addresses are defined in settings.h. With the current settings, up to 2 startup blocks may

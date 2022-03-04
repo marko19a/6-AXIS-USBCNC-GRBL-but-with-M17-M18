@@ -25,46 +25,17 @@
 #define GRBL_VERSION "1.1f"
 #define GRBL_VERSION_BUILD "20180715" //20170801
 
+
 #if !defined(STM32F103C8) && !defined(WIN32)
 #define AVRTARGET
 #endif
 
 // Define standard libraries used by Grbl.
-#ifdef AVRTARGET
-#include <avr/io.h>
-#include <avr/pgmspace.h>
-#include <avr/interrupt.h>
-#include <avr/wdt.h>
-#include <util/delay.h>
-#include <inttypes.h>
-#include <stdbool.h>
-#define PORTPINDEF uint8_t
-#endif
+
 #include <math.h>
-#ifdef WIN32
-#include <Windows.h>
-typedef signed char  int8_t;
-typedef signed short int16_t;
-typedef signed int   int32_t;
-typedef unsigned char  uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int   uint32_t;
-typedef signed long long   int64_t;
-typedef unsigned long long uint64_t;
-typedef int bool;
-#define false 0
-#define true 1
-#define truncf(x) (int32_t)x
-#define PSTR(x) x
-#define pgm_read_byte_near(x) *(x)
-#define _delay_ms(x) Sleep(x)
-#define M_PI 3.1415926f
-#define LOG(x,y)
-#define PORTPINDEF uint8_t
-#define printPgmString printString
-//#define NOEEPROMSUPPORT
-#endif
+
 #ifdef STM32F103C8
+#undef USEUSB                       /// comment for USB use
 #include "stm32f10x.h"
 #include "stm32f10x_gpio.h"
 #include "stm32f10x_exti.h"
@@ -123,11 +94,6 @@ typedef int bool;
 //  #error "USE_SPINDLE_DIR_AS_ENABLE_PIN may only be used with a 328p processor"
 #endif
 
-#ifdef AVRTARGET
-#if !defined(USE_SPINDLE_DIR_AS_ENABLE_PIN) && defined(SPINDLE_ENABLE_OFF_WITH_ZERO_SPEED)
-	#error "SPINDLE_ENABLE_OFF_WITH_ZERO_SPEED may only be used with USE_SPINDLE_DIR_AS_ENABLE_PIN enabled"
-#endif
-#endif
 
 #if defined(STM32F103C8) && defined(USE_SPINDLE_DIR_AS_ENABLE_PIN)
   #error "USE_SPINDLE_DIR_AS_ENABLE_PIN may only be used with AVRTARGET config"

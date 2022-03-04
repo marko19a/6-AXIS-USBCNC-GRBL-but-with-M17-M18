@@ -327,6 +327,11 @@ void report_gcode_modes()
     else { serial_write('9'); }
   #endif
 
+  #ifdef MANUAL_POWER
+    if (gc_state.modal.power == MOTOR_DISABLE_POWER) { report_util_gcode_modes_M(); serial_write('18'); }
+    else { report_util_gcode_modes_M(); serial_write('17'); }
+  #endif
+
 	#ifdef ENABLE_PARKING_OVERRIDE_CONTROL
 		if (sys.override_ctrl == OVERRIDE_PARKING_MOTION) {
 			report_util_gcode_modes_M();

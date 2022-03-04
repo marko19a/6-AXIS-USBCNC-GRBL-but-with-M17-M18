@@ -21,18 +21,10 @@
 #include "grbl.h"
 
 
+
 void system_init()
 {
-#ifdef AVRTARGET
-  CONTROL_DDR &= ~(CONTROL_MASK); // Configure as input pins
-  #ifdef DISABLE_CONTROL_PIN_PULL_UP
-    CONTROL_PORT &= ~(CONTROL_MASK); // Normal low operation. Requires external pull-down.
-  #else
-    CONTROL_PORT |= CONTROL_MASK;   // Enable internal pull-up resistors. Normal high operation.
-  #endif
-  CONTROL_PCMSK |= CONTROL_MASK;  // Enable specific pins of the Pin Change Interrupt
-  PCICR |= (1 << CONTROL_INT);   // Enable Pin Change Interrupt
-#endif
+
 #ifdef STM32F103C8
   GPIO_InitTypeDef GPIO_InitStructure;
   RCC_APB2PeriphClockCmd(RCC_CONTROL_PORT | RCC_APB2Periph_AFIO, ENABLE);
@@ -266,16 +258,14 @@ uint8_t system_execute_line(char *line)
                 case 'X': mc_homing_cycle(HOMING_CYCLE_X); break;
                 case 'Y': mc_homing_cycle(HOMING_CYCLE_Y); break;
                 case 'Z': mc_homing_cycle(HOMING_CYCLE_Z); break;
-// --- YSV 22-06-2018
-				#if defined  (AA_AXIS) || (AB_AXIS) || (ABC_AXIS)
 				case 'A': mc_homing_cycle(HOMING_CYCLE_A); break;
-  				#endif
+
 				#if defined  (AB_AXIS) || (ABC_AXIS)
-				case 'B': mc_homing_cycle(HOMING_CYCLE_B); break;
-				#endif
+					case 'B': mc_homing_cycle(HOMING_CYCLE_B); break;
+					#endif
 				#ifdef ABC_AXIS
-				case 'C': mc_homing_cycle(HOMING_CYCLE_C); break;
-				#endif
+					case 'C': mc_homing_cycle(HOMING_CYCLE_C); break;
+					#endif
 // ---
                 default: return(STATUS_INVALID_STATEMENT);
               }
