@@ -283,7 +283,7 @@ uint8_t gc_execute_line(char *line)
             }
             break;
           #ifdef MANUAL_POWER
-            word_bit = MODAL_GROUP_M8;
+            word_bit = MODAL_GROUP_M17;
             case 17: case 18:
             switch (int_value) {
             case 17: 

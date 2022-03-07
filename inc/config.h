@@ -163,14 +163,14 @@
 
 #elif defined AB_AXIS
 
-#define BP3
+#define BP1
 
 #if defined BP1
 
 //BP1
 #define HOMING_CYCLE_0 (1<<Z_AXIS)					// REQUIRED: First move Z to clear workspace.
 #define HOMING_CYCLE_1 (1<<Y_AXIS)  				// OPTIONAL: Then move X,Y at the same time.
-#define HOMING_CYCLE_2 ((1<<X_AXIS)|(1<<A_AXIS))  	// OPTIONAL: Then move A,B at the same time.
+#define HOMING_CYCLE_2 (1<<X_AXIS) 	        // OPTIONAL: Then move A,B at the same time.
 
 #elif defined BP2
 
