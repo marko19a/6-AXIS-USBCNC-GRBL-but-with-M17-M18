@@ -345,6 +345,5 @@ void settings_init() {
     settings_restore(SETTINGS_RESTORE_ALL); // Force restore all EEPROM data.
     report_grbl_settings();
   }
-  settings.power = 1;
 }
 

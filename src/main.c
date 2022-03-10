@@ -209,6 +209,10 @@ int main(void)
     plan_reset(); // Clear block buffer and planner variables
     st_reset(); // Clear stepper subsystem variables.
 
+	#ifdef MANUAL_POWER
+  	sys.power = MOTOR_ENABLE_POWER;
+  	#endif
+
     // Sync cleared gcode and planner positions to current system position.
     plan_sync_position();
     gc_sync_position();

@@ -309,7 +309,7 @@ void st_wake_up()
   bool pin_state = false;
 
   #ifdef MANUAL_POWER
-  if (settings.power == 1) pin_state = false;
+  if (sys.power == MOTOR_ENABLE_POWER) pin_state = false;
   else pin_state = true;
   #endif
 
@@ -406,7 +406,7 @@ void st_go_idle()
     pin_state = true; // Override. Disable steppers.
   }
   #ifdef MANUAL_POWER
-  if (settings.power == 1) pin_state = false;
+  if (sys.power == MOTOR_ENABLE_POWER) pin_state = false;
   else pin_state = true;
   #endif
   if (bit_istrue(settings.flags,BITFLAG_INVERT_ST_ENABLE)) { pin_state = !pin_state; } // Apply pin invert.

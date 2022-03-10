@@ -288,15 +288,13 @@ uint8_t gc_execute_line(char *line)
             switch (int_value) {
             case 17: 
             {
-              gc_block.modal.power = MOTOR_ENABLE_POWER; 
-              settings.power = gc_block.modal.power;
+              sys.power = MOTOR_ENABLE_POWER; 
               st_wake_up();
               break;
             }
             case 18: 
             {
-              gc_block.modal.power = MOTOR_DISABLE_POWER; 
-              settings.power = gc_block.modal.power;
+              sys.power = MOTOR_DISABLE_POWER; 
               st_wake_up();
               break;
             }

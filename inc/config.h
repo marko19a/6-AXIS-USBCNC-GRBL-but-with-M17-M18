@@ -163,9 +163,9 @@
 
 #elif defined AB_AXIS
 
-#define BP1
+#define BP2
 
-#if defined BP1
+#if defined BP3
 
 //BP1
 #define HOMING_CYCLE_0 (1<<Z_AXIS)					// REQUIRED: First move Z to clear workspace.
