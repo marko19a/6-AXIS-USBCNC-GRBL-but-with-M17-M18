@@ -1,4 +1,9 @@
-## This fork just adds M17 and M18 commands via MANUAL_POWER in config.h
+## This fork just adds M17 and M18 commands
+
+To enable M17 and M18 commands uncomment MANUAL_POWER in config.h
+To disable M17 and M18 commands comment MANUAL_POWER in config.h
+
+Use $G to check if motor state is in M17 (enabled) or M18 (disabled)
 
 # up to 6-AXIS-USBCNC-GRBL
 This repository is based on [usbcnc grbl](https://github.com/usbcnc/grbl) which in turn is based on [native grbl 1.1f](https://github.com/gnea/grbl)<br>
