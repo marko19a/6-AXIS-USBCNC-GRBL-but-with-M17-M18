@@ -199,6 +199,10 @@ int main(void)
     sys_rt_exec_motion_override = 0;
     sys_rt_exec_accessory_override = 0;
 
+	#ifdef MANUAL_POWER
+  	sys.power = MOTOR_ENABLE_POWER;
+  	#endif
+
     // Reset Grbl primary systems.
     serial_reset_read_buffer(); // Clear serial read buffer
     gc_init(); // Set g-code parser to default state
@@ -208,10 +212,6 @@ int main(void)
     probe_init();
     plan_reset(); // Clear block buffer and planner variables
     st_reset(); // Clear stepper subsystem variables.
-
-	#ifdef MANUAL_POWER
-  	sys.power = MOTOR_ENABLE_POWER;
-  	#endif
 
     // Sync cleared gcode and planner positions to current system position.
     plan_sync_position();
