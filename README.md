@@ -1,6 +1,7 @@
 ## This fork just adds M17 and M18 commands
 
 To enable M17 and M18 commands uncomment MANUAL_POWER in config.h
+
 To disable M17 and M18 commands comment MANUAL_POWER in config.h
 
 Use $G to check if motor state is in M17 (enabled) or M18 (disabled)
