@@ -328,8 +328,10 @@ void report_gcode_modes()
   #endif
 
   #ifdef MANUAL_POWER
-    if (sys.power == MOTOR_ENABLE_POWER) { report_util_gcode_modes_M(); serial_write('17'); }
-    else { report_util_gcode_modes_M(); serial_write('18'); }
+    report_util_gcode_modes_M();
+    serial_write('1');
+    if (sys.power == MOTOR_ENABLE_POWER) { serial_write('7'); }
+    else { serial_write('8'); }
   #endif
 
 	#ifdef ENABLE_PARKING_OVERRIDE_CONTROL
